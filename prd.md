@@ -41,19 +41,25 @@
 - **Funcionalidad 2:** Una vez que ingresa el profesional debe proponer tipo de beneficio ( Jubilación Parcial u Ordinaria) y fecha mínima de Jubilación.  
 - **Funcionalidad 3:** El sistema no debe permitir proyectar con fechas menores a la fecha mínima de Jubilacion( cumpleaños 60)
 - **Funcionalidad 4:** El sistema no debe permitir proyectar si el afiliado presenta estado de la matricula fallecido.
-- **Funcionalidad 5:** El sistema debe mostrar un reporte de la proyección en formato pdf y que se pueda descargar.
+- **Funcionalidad 5:** Si la fecha de jubilación elegida es >= a la fecha mínima de Jubilación, el sistema debe mostrar un reporte de la proyección en formato pdf y que se pueda descargar.
 ---
 
 ## 7. Requerimientos No Funcionales
 - **Performance:**  Generación del reporte en menos de 2s
--  **Experiencia:** Cantidad mínimas de clics para generar el reporte : 1. Al ingresar a la web las fechas y tipo de beneficio ya son propuestas por el sistema el usuario solo realiza clic en un botón para generar el reporte de proyección.
+-  **Experiencia:** Cantidad mínimas de clics para generar el reporte : 1. Al ingresar a la web las fechas y tipo de beneficio  son propuestas por el sistema y el usuario realiza clic en un botón para generar el reporte de proyección.
 
+## 8. Casos de Prueba
 
----
+| Nº | Funcionalidad | Caso de prueba | Datos de entrada | Resultado esperado |
+|----|---------------|----------------|------------------|--------------------|
+| 1  | Validación de condición de jubilación | Ingreso al sistema con profesional que cumple requisitos de jubilación | Usuario con edad ≥ 60 y aportes completos | Se muestra alerta “Ud. se encuentra en condiciones de jubilarse” y el botón **Proyectar** se deshabilita |
+| 2  | Selección de tipo de beneficio | Profesional accede al módulo de proyección | Usuario activo con matrícula vigente | Se despliega combo con opciones **Jubilación Parcial** y **Jubilación Ordinaria**, y se muestra la **fecha mínima de jubilación** calculada |
+| 3  | Validación de fecha mínima | Profesional intenta proyectar con fecha anterior al cumpleaños 60 | Fecha ingresada < fecha mínima de jubilación | Se muestra mensaje de error “La fecha ingresada no puede ser menor a la fecha mínima de jubilación” y no se genera proyección |
+| 4  | Validación de estado de matrícula | Profesional con estado “Fallecido” intenta proyectar | Estado de matrícula = Fallecido | Se muestra alerta “No es posible realizar proyección para afiliados fallecidos” y se bloquea el botón **Proyectar** |
+| 5  | Generación de reporte PDF | Profesional proyecta correctamente con datos válidos | Fecha ≥ fecha mínima, estado activo | Se genera reporte en formato **PDF**, se muestra botón **Descargar**, y el archivo contiene los datos de la proyección |
 
-## 8. Flujo de Usuario / UX
-- **Diagrama de flujo o wireframes (si aplica):**  
-- **Principios de diseño:**  
+## 9. Pantalla actual
+
 <img width="1340" height="872" alt="image" src="https://github.com/user-attachments/assets/6e3e4bcc-06fe-466c-94cc-d57cd687b2a2" />
 
 
