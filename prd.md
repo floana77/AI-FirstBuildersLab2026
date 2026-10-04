@@ -58,12 +58,12 @@
 
 | Nº | Funcionalidad | Caso de prueba | Datos de entrada | Resultado esperado |
 |----|---------------|----------------|------------------|--------------------|
-| 1  | Validación de condición de jubilación | Ingreso al sistema con profesional que cumple requisitos de jubilación | Usuario con edad ≥ 60 y aportes completos | Se muestra alerta “Ud. se encuentra en condiciones de jubilarse” y el botón **Proyectar** se deshabilita |
-| 2  | Validación profesional con condición de jubilación | Ingreso al sistema con profesional que cumple requisitos de jubilación | Usuario con edad ≥ 60 y aportes completos | aparece un botón "Inicie su trámite de jubilación aquí |
-| 3  | Selección de tipo de beneficio | Profesional accede al módulo de proyección | Usuario activo con matrícula vigente | Se despliega combo con opciones **Jubilación Parcial** y **Jubilación Ordinaria**, y se muestra la **fecha mínima de jubilación** calculada |
+| 1  | Validación de condición de jubilación | Ingreso al sistema con profesional que cumple requisitos de jubilación | Fecha mínima de jubilación menor o igual a hoy | Se muestra alerta “Ud. se encuentra en condiciones de jubilarse” y el botón **Proyectar** se deshabilita |
+| 2  | Validación profesional con condición de jubilación | Ingreso al sistema con profesional que cumple requisitos de jubilación | Fecha de jubilación mínima menor o igual a hoy | aparece un botón "Inicie su trámite de jubilación aquí |
+| 3  | Selección de tipo de beneficio | Profesional accede al módulo de proyección | Usuario activo con matrícula vigente | Se despliega opciones **Jubilación Parcial** y **Jubilación Ordinaria**, y se muestra la **fecha mínima de jubilación** calculada |
 | 4  | Validación de fecha mínima | Profesional intenta proyectar con fecha anterior al cumpleaños 60 | Fecha ingresada < fecha mínima de jubilación | Se muestra mensaje de error “La fecha ingresada no puede ser menor a la fecha mínima de jubilación” y no se genera proyección |
-| 5  | Validación de estado de matrícula | Profesional con estado “Fallecido” intenta proyectar | Estado de matrícula = Fallecido | Se muestra alerta “No es posible realizar proyección para afiliados fallecidos” y se bloquea el botón **Proyectar** |
-| 6  | Generación de reporte PDF | Profesional proyecta correctamente con datos válidos | Fecha ≥ fecha mínima, estado activo | Se genera reporte en formato **PDF**, el archivo contiene los datos de la proyección |
+| 5  | Validación de estado de matrícula | Profesional con estado “Fallecido” intenta proyectar | Estado de matrícula = Fallecido | Se muestra alerta “No es posible realizar proyección para afiliados con estado matricular fallecido” y se bloquea el botón **Proyectar** |
+| 6  | Generación de reporte PDF | Profesional proyecta correctamente con datos válidos | Fecha seleccionada > fecha mínima, estado activo | Se genera reporte en formato **PDF**,se muestra en una nueva pestaña y el archivo contiene los datos de la proyección |
 ---
 ## 9. Pantalla actual
 
