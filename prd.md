@@ -27,7 +27,10 @@
 - **Incluido en el alcance:**  Actualización de frontend y reutilización de los servicios backend actuales. La proyección sólo estará disponible como es actualmente para los beneficios de Jubilación Ordinaria y Jubilación Parcial.
 - **Excluido del alcance:**
    * Desarrollo de nuevos servicios backend. En una segunda etapa, luego del lanzamiento del nuevo site, se trabajará en la actualización de api y servicios backend, donde se incluye cálculo de haber jubilatorio y generación de reporte pdf.
-   * El login no será desarrollado será provisto por el sitio actual. 
+   * Cambios en el cálculo del haber jubilatorio y en el contenido o diseño del reporte PDF.
+*Desarrollo del login: lo provee el sitio actual.
+*Proyección de cualquier beneficio distinto de Jubilación Ordinaria y Jubilación Parcial.
+*Desarrollo de nuevos servicios o endpoints backend. En una segunda etapa, luego del lanzamiento del nuevo sitio, se actualizarán la API y los servicios backend, incluidos el cálculo del haber jubilatorio y la generación del PDF.
 
 ---
 
@@ -41,7 +44,7 @@
 ## 6. Requerimientos Funcionales
 - **RF-01:** Al ingresar a la web el sistema obtiene y valida las fechas minimas de jubilacion del profesional (jub.ordinaria y Jub.Parcial) son mayores a hoy significa que NO está en condiciones de jubilarse, debe mostrar una alerta indicando la situación y no permite proyectar.
 - **RF-02:** En caso de estar habilitada la proyección (con condicion jubilatoria ) debe mostrar un botón con el texto Inicie su trámite de Jubilación aquí.
-- **RF-03:** Una vez que ingresa el profesional el sistema debe proponer tipo de beneficio ( Jubilación Parcial u Ordinaria) y fecha mínima de Jubilación.  
+- **RF-03:** Una vez que ingresa el profesional el sistema debe proponer tipo de beneficio ( Jubilación Parcial u Ordinaria) y fecha mínima de Jubilación pero debe permitir elegir otra fecha de jubilación. 
 - **RF-04:** El sistema no debe permitir proyectar con fechas menores a la fecha mínima de Jubilación ( cumpleaños 60/65).
 - **RF-05:** El sistema no debe permitir proyectar si el afiliado presenta estado de la matricula fallecido, debe informarlo con una alerta y no permite proyectar.
 - **RF-06:** Si la fecha de jubilación elegida (por defecto es la minima) es >= a la fecha mínima de Jubilación, el sistema debe mostrar un botón para generar el reporte de la proyección.
@@ -53,6 +56,7 @@
 -  **RNF-03:** Experiencia: tanto la pantalla como reporte deben ser visibles con claridad en resoluciones de tablet y celular.
 -  **RNF-04:** Experiencia: como algunos usuarios son adultos mayores la pantalla debe ser simple, de alto contraste, con textos grandes y botones amplios que faciliten la lectura y reduzcan los errores táctiles.
 -  **RNF-05:** Experiencia: el reporte de la proyección debe mostrarse en una nueva pestañay en formato pdf
+-  **RNF-06:** Experiencia :si el servicio de proyección está caído o sin respuesta, cuando hace clic en Proyectar, entonces se muestra "No pudimos generar su proyección. Intente nuevamente."  
   ---
 ## 8. Casos de Prueba/aceptación
 
@@ -64,6 +68,7 @@
 | 4  | Validación de fecha mínima | Profesional intenta proyectar con fecha anterior al cumpleaños 60 | Fecha ingresada < fecha mínima de jubilación | Se muestra mensaje de error “La fecha ingresada no puede ser menor a la fecha mínima de jubilación” y no se genera proyección |
 | 5  | Validación de estado de matrícula | Profesional con estado “Fallecido” intenta proyectar | Estado de matrícula = Fallecido | Se muestra alerta “No es posible realizar proyección para afiliados con estado matricular fallecido” y se bloquea el botón **Proyectar** |
 | 6  | Generación de reporte PDF | Profesional proyecta correctamente con datos válidos | Fecha seleccionada > fecha mínima, estado activo | Se genera reporte en formato **PDF**,se muestra en una nueva pestaña y el archivo contiene los datos de la proyección |
+| 7  | servicio de proyecion caido | Profesional proyecta correctamente con datos válidos | Fecha seleccionada > fecha mínima, estado activo |se muestra el mensaje"No pudimos generar su proyección. Intente nuevamente."  |
 ---
 ## 9. Pantalla actual
 
@@ -79,4 +84,9 @@
 - Riesgo: servicios actuales no disponibles → mitigación: creación de mockup (2) datos personales del profesional, fechas minimas de jubilacion por tipo y reporte pdf de prueba.
 - Dependencia: actualmente se utiliza   servicios del backend y login del sitio actual.
   En caso de no funcionar los servicios o en una primera versión => mitigación creación de mockups.
+- Riesgo: el PDF se descarga en vez de abrirse en una nueva pestaña en navegadores móviles → mitigación: probar AC-13 en los navegadores móviles soportados, incluido Safari en iOS, antes del release.
+- Riesgo: los afiliados de 60 años o más cometen errores táctiles o no comprenden la pantalla → mitigación: cumplir RNF-04 y hacer una prueba de usabilidad con afiliados de 60 años o más antes del release.
+- Dependencia: el login y la sesión del sitio actual.
+- Dependencia: los servicios backend actuales de datos del afiliado, estado de matrícula, condición de jubilación, fechas mínimas y generación del PDF.
+- Dependencia: los diseños de pantalla aprobados (Opción A — Tarjeta única guiada).
 
