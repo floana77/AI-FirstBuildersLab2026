@@ -39,20 +39,20 @@
 ---
 
 ## 6. Requerimientos Funcionales
-- **RF-01:** Al ingresar a la web el sistema valida si el profesional está en condiciones de jubilarse, si se puede jubilar debe mostrar una alerta indicando la situación y no permite proyectar.
-- **RF-02:** En caso de no estar habilitada la proyección por estar en condiciones de jubilarse el sistema debe mostrar un botón con el texto Inicie su trámite de Jubilación aquí.
+- **RF-01:** Al ingresar a la web el sistema obtiene y valida las fechas minimas de jubilacion del profesional (jub.ordinaria y Jub.Parcial) son mayores a hoy significa que NO está en condiciones de jubilarse, debe mostrar una alerta indicando la situación y no permite proyectar.
+- **RF-02:** En caso de estar habilitada la proyección (con condicion jubilatoria ) debe mostrar un botón con el texto Inicie su trámite de Jubilación aquí.
 - **RF-03:** Una vez que ingresa el profesional el sistema debe proponer tipo de beneficio ( Jubilación Parcial u Ordinaria) y fecha mínima de Jubilación.  
 - **RF-04:** El sistema no debe permitir proyectar con fechas menores a la fecha mínima de Jubilación ( cumpleaños 60/65).
-- **RF-05:** El sistema no debe permitir proyectar si el afiliado presenta estado de la matricula fallecido, debe informarlo con una alerta.
-- **RF-06:** Si la fecha de jubilación elegida es >= a la fecha mínima de Jubilación, el sistema debe mostrar un reporte de la proyección en formato pdf y que se pueda descargar.
+- **RF-05:** El sistema no debe permitir proyectar si el afiliado presenta estado de la matricula fallecido, debe informarlo con una alerta y no permite proyectar.
+- **RF-06:** Si la fecha de jubilación elegida (por defecto es la minima) es >= a la fecha mínima de Jubilación, el sistema debe mostrar un botón para generar el reporte de la proyección.
 ---
 
 ## 7. Requerimientos No Funcionales
 - **RNF-01:** Performance: generación del reporte en menos de 2s.
 - **RNF-02:** Experiencia: Cantidad mínimas de clics para generar el reporte (1). Al ingresar a la web las fechas y tipo de beneficio  son propuestas por el sistema, por defecto , se debe posicionar o resaltar la menor fecha de jubilación según el tipo de beneficio, luego  el usuario sólo debe realizar un clic en el botón para generar el reporte de proyección.
 -  **RNF-03:** Experiencia: tanto la pantalla como reporte deben ser visibles con claridad en resoluciones de tablet y celular.
--  **RNF-04:** Experiencia: como tenemos usuarios que son adultos mayores la pantalla debe ser simple, de alto contraste, con textos grandes y botones amplios que faciliten la lectura y reduzcan los errores táctiles.
--  **RNF-05:** Experiencia: la pdf del reporte de la proyección debe mostrarse en una nueva pestaña.
+-  **RNF-04:** Experiencia: como algunos usuarios son adultos mayores la pantalla debe ser simple, de alto contraste, con textos grandes y botones amplios que faciliten la lectura y reduzcan los errores táctiles.
+-  **RNF-05:** Experiencia: el reporte de la proyección debe mostrarse en una nueva pestañay en formato pdf
   ---
 ## 8. Casos de Prueba/aceptación
 
@@ -63,7 +63,7 @@
 | 3  | Selección de tipo de beneficio | Profesional accede al módulo de proyección | Usuario activo con matrícula vigente | Se despliega combo con opciones **Jubilación Parcial** y **Jubilación Ordinaria**, y se muestra la **fecha mínima de jubilación** calculada |
 | 4  | Validación de fecha mínima | Profesional intenta proyectar con fecha anterior al cumpleaños 60 | Fecha ingresada < fecha mínima de jubilación | Se muestra mensaje de error “La fecha ingresada no puede ser menor a la fecha mínima de jubilación” y no se genera proyección |
 | 5  | Validación de estado de matrícula | Profesional con estado “Fallecido” intenta proyectar | Estado de matrícula = Fallecido | Se muestra alerta “No es posible realizar proyección para afiliados fallecidos” y se bloquea el botón **Proyectar** |
-| 6  | Generación de reporte PDF | Profesional proyecta correctamente con datos válidos | Fecha ≥ fecha mínima, estado activo | Se genera reporte en formato **PDF**, se muestra botón **Descargar**, y el archivo contiene los datos de la proyección |
+| 6  | Generación de reporte PDF | Profesional proyecta correctamente con datos válidos | Fecha ≥ fecha mínima, estado activo | Se genera reporte en formato **PDF**, el archivo contiene los datos de la proyección |
 ---
 ## 9. Pantalla actual
 
@@ -76,7 +76,7 @@
 
 ---
 ## 11. Riesgos y Dependencias
-- Riesgo: servicios actuales no disponibles → mitigación: creación de mockup (3) datos personales del profesional, fechas minimas de jubilacion por tipo y reporte pdf de prueba.
+- Riesgo: servicios actuales no disponibles → mitigación: creación de mockup (2) datos personales del profesional, fechas minimas de jubilacion por tipo y reporte pdf de prueba.
 - Dependencia: actualmente se utiliza   servicios del backend y login del sitio actual.
   En caso de no funcionar los servicios o en una primera versión => mitigación creación de mockups.
 
